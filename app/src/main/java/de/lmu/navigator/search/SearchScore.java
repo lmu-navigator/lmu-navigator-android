@@ -1,8 +1,11 @@
 package de.lmu.navigator.search;
 
+import uk.ac.shef.wit.simmetrics.similaritymetrics.AbstractStringMetric;
+
 public class SearchScore implements Comparable<SearchScore> {
     private final static float MATCH_THRESHOLD = 0.5f;
-    private static MyPrefixLevenshtein mSimilarityMeasure = new MyPrefixLevenshtein();
+    private final static boolean FUZZYWUZZY_STRING_METRIC = true;
+    private static AbstractStringMetric mSimilarityMeasure = FUZZYWUZZY_STRING_METRIC ? new FuzzyWuzzyStringMetric() : new MyPrefixLevenshtein();
 
     private Searchable mSearchable;
     private float simPrimary = 1f;
