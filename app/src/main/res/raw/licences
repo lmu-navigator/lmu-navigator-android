@@ -73,6 +73,12 @@
         <license>Apache Software License 2.0</license>
     </notice>
     <notice>
+        <name>JavaWuzzy</name>
+        <url>https://github.com/xdrop/fuzzywuzzy</url>
+        <copyright/>
+        <license>Apache Software License 2.0</license>
+    </notice>
+    <notice>
         <name>SimMetrics</name>
         <url>http://sourceforge.net/projects/simmetrics/</url>
         <copyright/>
