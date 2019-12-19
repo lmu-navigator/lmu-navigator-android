@@ -31,6 +31,8 @@ public class SearchRoomActivity extends AbsSearchActivity {
         Building building = databaseManager.getBuilding(buildingCode);
 
         List<Room> rooms = databaseManager.getRoomsForBuilding(building, true, true);
+
+        // If same parent exists in different building parts, add building part as hint in description
         SetMultimap<String, String> roomNamesMap = HashMultimap.create();
         for (Room r : rooms) {
             roomNamesMap.put(r.getName(), r.getFloor().getBuildingPart().getName());

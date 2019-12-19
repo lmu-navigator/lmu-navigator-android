@@ -20,9 +20,11 @@ import java.util.List;
 import de.lmu.navigator.DataConfig;
 import de.lmu.navigator.database.model.Building;
 import de.lmu.navigator.database.model.BuildingPart;
+import de.lmu.navigator.database.model.BuildingSynonym;
 import de.lmu.navigator.database.model.City;
 import de.lmu.navigator.database.model.Floor;
 import de.lmu.navigator.database.model.Room;
+import de.lmu.navigator.database.model.RoomSynonym;
 import de.lmu.navigator.database.model.Street;
 import de.lmu.navigator.preferences.Preferences;
 import io.realm.Realm;
@@ -117,6 +119,16 @@ public class UpdateService extends IntentService {
             List<Room> rooms = gson.fromJson(reader, new TypeToken<List<Room>>() {}.getType());
             reader.close();
 
+            in = assetManager.open("data/23_building_syn.json");
+            reader = new InputStreamReader(in);
+            List<BuildingSynonym> buildingSynonyms = gson.fromJson(reader, new TypeToken<List<BuildingSynonym>>() {}.getType());
+            reader.close();
+
+            in = assetManager.open("data/26_room_syn.json");
+            reader = new InputStreamReader(in);
+            List<RoomSynonym> roomSynonyms = gson.fromJson(reader, new TypeToken<List<RoomSynonym>>() {}.getType());
+            reader.close();
+
             // Setup relationships
             Log.d(LOG_TAG, "Setup relationships...");
             for (Street s : streets) {
@@ -148,6 +160,15 @@ public class UpdateService extends IntentService {
                     }
                 }
             }
+            for (BuildingSynonym s : buildingSynonyms) {
+                for (Building b : buildings) {
+                    if (b.getCode().equals(s.getParentId())) {
+                        b.getSynonyms().add(s);
+                        //s.setBuilding(b);
+                        break;
+                    }
+                }
+            }
             for (Floor f : floors) {
                 fixFloor(f);
                 for (BuildingPart p : buildingParts) {
@@ -168,6 +189,15 @@ public class UpdateService extends IntentService {
                     }
                 }
             }
+            for (RoomSynonym s : roomSynonyms) {
+                for (Room r : rooms) {
+                    if (r.getCode().equals(s.getParentId())) {
+                        r.getSynonyms().add(s);
+                        //s.setParent(r);
+                        break;
+                    }
+                }
+            }
 
             // Update database
             Log.d(LOG_TAG, "Update database...");
@@ -178,8 +208,10 @@ public class UpdateService extends IntentService {
                 realm.where(Street.class).findAll().deleteAllFromRealm();
                 realm.where(Building.class).findAll().deleteAllFromRealm();
                 realm.where(BuildingPart.class).findAll().deleteAllFromRealm();
+                realm.where(BuildingSynonym.class).findAll().deleteAllFromRealm();
                 realm.where(Floor.class).findAll().deleteAllFromRealm();
                 realm.where(Room.class).findAll().deleteAllFromRealm();
+                realm.where(RoomSynonym.class).findAll().deleteAllFromRealm();
 
                 // Save new data
                 // Inserting cities will insert all data due to relationships
@@ -219,7 +251,7 @@ public class UpdateService extends IntentService {
         if (mFavorites.isEmpty() && b.getCode().equals("bw0000")) {
             b.setStarred(true);
         }
-        b.setDisplayName(ModelHelper.getBuildingNameFixed(b.getDisplayName()));
+        b.setName(ModelHelper.getBuildingNameFixed(b.getName()));
     }
 
     private void fixBuildingPart(BuildingPart p) {

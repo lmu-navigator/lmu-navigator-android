@@ -7,4 +7,6 @@ public interface Searchable {
     String getSecondaryText();
 
     String getCode();
+
+    String getClassName();
 }

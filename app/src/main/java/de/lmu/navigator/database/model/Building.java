@@ -2,13 +2,15 @@ package de.lmu.navigator.database.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.Ignore;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
 
-public class Building extends RealmObject {
+public class Building extends RealmObject implements Synonymable<Building> {
 
     @Required
     @PrimaryKey
@@ -20,7 +22,8 @@ public class Building extends RealmObject {
     private String streetCode;
 
     @Required
-    private String displayName;
+    @SerializedName("displayName")
+    private String name;
 
     @SerializedName("lat")
     private double coordLat;
@@ -31,6 +34,8 @@ public class Building extends RealmObject {
     private boolean starred = false;
 
     private RealmList<BuildingPart> buildingParts = new RealmList<>();
+
+    private RealmList<BuildingSynonym> synonyms = new RealmList<>();
 
     public RealmList<BuildingPart> getBuildingParts() {
         return buildingParts;
@@ -56,12 +61,13 @@ public class Building extends RealmObject {
         this.street = street;
     }
 
-    public String getDisplayName() {
-        return displayName;
+    @Override
+    public String getName() {
+        return name;
     }
 
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public double getCoordLat() {
@@ -94,5 +100,19 @@ public class Building extends RealmObject {
 
     public void setStreetCode(String streetCode) {
         this.streetCode = streetCode;
+    }
+
+    @Override
+    public List<BuildingSynonym> getSynonyms() {
+        return synonyms;
+    }
+
+    @Override
+    public boolean hasSynonyms() {
+        return synonyms.size() > 0;
+    }
+
+    public void setSynonyms(RealmList<BuildingSynonym> synonyms) {
+        this.synonyms = synonyms;
     }
 }

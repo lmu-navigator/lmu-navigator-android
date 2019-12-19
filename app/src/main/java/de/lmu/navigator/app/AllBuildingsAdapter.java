@@ -32,8 +32,8 @@ public class AllBuildingsAdapter extends BuildingsAdapter {
     @Override
     protected void onBindBilduing(RecyclerView.ViewHolder vh, Building building) {
         AllBuildingsAdapter.ViewHolder holder = (AllBuildingsAdapter.ViewHolder) vh;
-        holder.city.setText(building.getStreet().getCity().getName());
-        holder.street.setText(building.getDisplayName());
+        holder.city.setText(ModelHelper.getDescription(building));
+        holder.street.setText(ModelHelper.getName(building));
 
         int imageSize = mContext.getResources().getDimensionPixelSize(R.dimen.image_size_all);
         Picasso.get()

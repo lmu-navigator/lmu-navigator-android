@@ -19,6 +19,8 @@ import de.lmu.navigator.DataConfig;
 import de.lmu.navigator.R;
 import de.lmu.navigator.database.UpdateService;
 import de.lmu.navigator.preferences.Preferences;
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 import me.alexrs.prefs.lib.Prefs;
 
 public class LaunchActivity extends AppCompatActivity {
@@ -48,6 +50,15 @@ public class LaunchActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Always set realm schema version
+        RealmConfiguration config = new RealmConfiguration.Builder()
+                .name("default.realm")
+                .schemaVersion(DataConfig.SHIPPED_DATA_VERSION)
+                .deleteRealmIfMigrationNeeded()
+                .build();
+        Realm.setDefaultConfiguration(config);
+        // TODO add migration, if don't want to delete old db.
 
         if (shouldUpdate()) {
             setContentView(R.layout.activity_launch);

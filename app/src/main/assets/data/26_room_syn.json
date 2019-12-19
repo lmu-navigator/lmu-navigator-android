@@ -1,0 +1,78 @@
+[
+  {
+    "rCode": "000000100_",
+    "syn": "Audimax"
+  },
+  {
+    "rCode": "000000027_",
+    "syn": "Lichthof"
+  },
+  {
+    "rCode": "0010-1097_",
+    "syn": "Stucafé"
+  },
+  {
+    "rCode": "001900001_",
+    "syn": "Studienkanzlei"
+  },
+  {
+    "rCode": "001901226_",
+    "syn": "Große Aula"
+  },
+  {
+    "rCode": "001901238_",
+    "syn": "Senatssaal"
+  },
+  {
+    "rCode": "002000020_",
+    "syn": "Kleiner Physikhörsaal"
+  },
+  {
+    "rCode": "002001120_",
+    "syn": "Großer Physikhörsaal"
+  },
+  {
+    "rCode": "TODO",
+    "syn": "Universitätsbibliothek"
+  },
+  {
+    "rCode": "100200029_",
+    "syn": "Café Gumbel"
+  },
+  {
+    "rCode": "100200038_",
+    "syn": "GAF"
+  },
+  {
+    "rCode": "7078-1014_",
+    "syn": "CIP-Pool Sibirien"
+  },
+  {
+    "rCode": "7078-1012_",
+    "syn": "CIP-Pool Gobi"
+  },
+  {
+    "rCode": "7078-1017_",
+    "syn": "CIP-Pool Takla-Makan"
+  },
+  {
+    "rCode": "7080-1102_",
+    "syn": "CIP-Pool Kalahari"
+  },
+  {
+    "rCode": "708100001_",
+    "syn": "CIP-Pool Antarktis"
+  },
+  {
+    "rCode": "708100005_",
+    "syn": "CIP-Pool Arktis"
+  },
+  {
+    "rCode": "100201015_",
+    "syn": "CIP-Pool Proxima"
+  },
+  {
+    "rCode": "102000001_",
+    "syn": "CIP-Pool Luna"
+  }
+]

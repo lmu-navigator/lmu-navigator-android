@@ -9,6 +9,7 @@ import android.view.View;
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
 
+import de.lmu.navigator.database.ModelHelper;
 import de.lmu.navigator.database.model.Building;
 import de.lmu.navigator.view.RealmAdapter;
 import io.realm.RealmResults;
@@ -56,6 +57,6 @@ public abstract class BuildingsAdapter extends RealmAdapter<Building> {
                     .width(size)
                     .height(size)
                 .endConfig()
-                .buildRound(b.getDisplayName().substring(0, 1), color);
+                .buildRound(ModelHelper.getName(b).substring(0, 1), color);
     }
 }

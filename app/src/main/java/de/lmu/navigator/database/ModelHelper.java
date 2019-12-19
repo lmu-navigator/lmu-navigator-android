@@ -7,16 +7,20 @@ import org.apache.commons.lang3.text.WordUtils;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import de.lmu.navigator.DataConfig;
 import de.lmu.navigator.database.model.Building;
 import de.lmu.navigator.database.model.BuildingPart;
 import de.lmu.navigator.database.model.Floor;
+import de.lmu.navigator.database.model.RealmLeaf;
+import de.lmu.navigator.database.model.Room;
+import de.lmu.navigator.database.model.Synonymable;
 
 public class ModelHelper {
 
     public static final String BUILDING_CODE = "code";
-    public static final String BUILDING_NAME = "displayName";
+    public static final String BUILDING_NAME = "name";
     public static final String BUILDING_STARRED = "starred";
 
     public static final String BUILDING_PART_CODE = "code";
@@ -29,10 +33,64 @@ public class ModelHelper {
     public static final String ROOM_FLOOR_MAP_URI = "floor.mapUri";
     public static final String ROOM_BUILDING_CODE = "floor.buildingPart.building.code";
 
+    public static final String SYNONYMS = "synonyms";
+
     public static final List<String> FLOOR_ORDER = Arrays.asList("UG2", "UG1", "EG", "ZG", "OG1",
             "ZG1", "OG2", "ZG2", "OG3", "OG4", "OG5", "OG6");
 
+    /**
+     * Display name synonyms, if available.
+     */
+    public static boolean displaySynonyms = true;
+
     private ModelHelper() {
+    }
+
+    /**
+     * If set, display all synonyms instead of the name.
+     */
+    public static <T extends Synonymable<T>> String getName(T synonymable) {
+        if(displaySynonyms && synonymable.hasSynonyms()) {
+            return getSynonymsString(synonymable);
+        }
+        return synonymable.getName();
+    }
+
+    /**
+     * Only add format, if synonyms are disabled.
+     *
+     * @param format a format string
+     */
+    public static String getName(Room room, String format) {
+        if(displaySynonyms && room.hasSynonyms()) {
+            return getSynonymsString(room);
+        }
+        return String.format(format, room.getName());
+    }
+
+    public static <T extends Synonymable<T>> String getDescription(T synonymable, String descSuffix) {
+        if(synonymable.hasSynonyms()) {
+            if(displaySynonyms) {
+                return synonymable.getName() + ", " + descSuffix;
+            }
+            return getSynonymsString(synonymable) + ", " + descSuffix;
+        }
+        return descSuffix;
+    }
+
+    public static String getDescription(Building building) {
+        return getDescription(building, building.getStreet().getCity().getName());
+    }
+
+    public static String getDescription(Room room) {
+        return getDescription(room, room.getFloor().getName());
+    }
+
+    public static <T extends Synonymable<T>> String getSynonymsString(T synonymable){
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            return synonymable.getSynonyms().stream().map(RealmLeaf::getName).collect(Collectors.joining(", "));
+        }
+        return synonymable.getSynonyms().get(0).getName();
     }
 
     public static String getBuildingNameFixed(String name) {
