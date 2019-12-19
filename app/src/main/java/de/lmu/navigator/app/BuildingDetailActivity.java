@@ -59,8 +59,8 @@ public class BuildingDetailActivity extends BaseActivity {
         mBuilding = mDatabaseManager.getBuilding(extraBuildingCode);
 
         setTitle(null);
-        mBuildingName.setText(mBuilding.getDisplayName());
-        mBuildingCity.setText(mBuilding.getStreet().getCity().getName());
+        mBuildingName.setText(ModelHelper.getName(mBuilding));
+        mBuildingCity.setText(ModelHelper.getDescription(mBuilding));
 
         final Drawable placeholder = TextDrawable.builder()
                 .beginConfig()
@@ -69,7 +69,7 @@ public class BuildingDetailActivity extends BaseActivity {
                             .getDimensionPixelSize(R.dimen.building_placeholder_font_size))
                     .toUpperCase()
                 .endConfig()
-                .buildRect(mBuilding.getDisplayName().substring(0, 1),
+                .buildRect(ModelHelper.getName(mBuilding).substring(0, 1),
                         ColorGenerator.MATERIAL.getColor(mBuilding));
 
         Picasso.get()
@@ -94,7 +94,7 @@ public class BuildingDetailActivity extends BaseActivity {
     @OnClick(R.id.layout_map)
     void showMap() {
         String url = String.format("http://maps.google.com/maps?geo:%s%s&q=%s",
-                mBuilding.getCoordLat(), mBuilding.getCoordLong(), mBuilding.getDisplayName());
+                mBuilding.getCoordLat(), mBuilding.getCoordLong(), mBuilding.getName());
         Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(url));
         startActivity(intent);
     }

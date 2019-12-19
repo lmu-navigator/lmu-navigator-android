@@ -37,6 +37,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.TransparentActionBar"/>
         <activity
+            android:name=".search.SearchAllActivity"
+            android:label="@string/search_label"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
             android:name=".search.SearchBuildingActivity"
             android:label="@string/search_label"
             android:screenOrientation="portrait">

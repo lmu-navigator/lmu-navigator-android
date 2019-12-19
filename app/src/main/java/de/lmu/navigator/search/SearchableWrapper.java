@@ -1,5 +1,6 @@
 package de.lmu.navigator.search;
 
+import de.lmu.navigator.database.ModelHelper;
 import de.lmu.navigator.database.model.Building;
 import de.lmu.navigator.database.model.Room;
 
@@ -11,6 +12,8 @@ public class SearchableWrapper implements Searchable {
 
     private String mCode;
 
+    private String mClassName;
+
     public static Searchable wrap(Room room, String buildingPartHint) {
         return new SearchableWrapper(room, buildingPartHint);
     }
@@ -20,9 +23,10 @@ public class SearchableWrapper implements Searchable {
     }
 
     private SearchableWrapper(Room room, String buildingPartHint) {
-        mPrimaryText = room.getName();
-        mSecondaryText = room.getFloor().getName();
+        mPrimaryText = ModelHelper.getName(room);
+        mSecondaryText = ModelHelper.getDescription(room);
         mCode = room.getCode();
+        mClassName = Room.class.getSimpleName();
 
         if (buildingPartHint != null) {
             mSecondaryText = mSecondaryText + " (" + buildingPartHint + ")";
@@ -30,9 +34,10 @@ public class SearchableWrapper implements Searchable {
     }
 
     private SearchableWrapper(Building building) {
-        mPrimaryText = building.getDisplayName();
-        mSecondaryText = building.getStreet().getCity().getName();
+        mPrimaryText = ModelHelper.getName(building);
+        mSecondaryText = ModelHelper.getDescription(building);
         mCode = building.getCode();
+        mClassName = Building.class.getSimpleName();
     }
 
 
@@ -49,5 +54,10 @@ public class SearchableWrapper implements Searchable {
     @Override
     public String getCode() {
         return mCode;
+    }
+
+    @Override
+    public String getClassName() {
+        return mClassName;
     }
 }

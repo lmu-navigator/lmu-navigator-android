@@ -11,6 +11,18 @@
             android:summary="@string/prefs_crash_logs_summary"
             android:defaultValue="true"/>
 
+        <SwitchPreference
+            android:key="key_display_synonym"
+            android:title="@string/prefs_display_synonym_title"
+            android:summary="@string/prefs_display_synonym_summary"
+            android:defaultValue="true"/>
+
+        <SwitchPreference
+            android:key="key_search_advanced"
+            android:title="@string/prefs_search_advanced_title"
+            android:summary="@string/prefs_search_advanced_summary"
+            android:defaultValue="true"/>
+
     </PreferenceCategory>
 
     <PreferenceCategory

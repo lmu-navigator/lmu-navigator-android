@@ -37,12 +37,12 @@ public class BuildingItem implements ClusterItem {
 
     @Override
     public String getTitle() {
-        return mBuilding.getDisplayName();
+        return ModelHelper.getName(mBuilding);
     }
 
     @Override
     public String getSnippet() {
-        return mBuilding.getStreet().getCity().getName();
+        return ModelHelper.getDescription(mBuilding);
     }
 
     @Override

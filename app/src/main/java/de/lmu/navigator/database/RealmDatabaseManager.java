@@ -102,6 +102,10 @@ public class RealmDatabaseManager {
         return rooms;
     }
 
+    public List<Room> getRoomsWithSynonym() {
+        return mRealm.where(Room.class).isNotEmpty(ModelHelper.SYNONYMS).findAll();
+    }
+
     private List<Floor> getFloorsForBuilding(Building b) {
         return mRealm.where(Floor.class)
                 .equalTo(ModelHelper.FLOOR_BUILDING_CODE, b.getCode())

@@ -46,6 +46,7 @@ public abstract class AbsSearchActivity extends BaseActivity
     private static final String LOG_TAG = AbsSearchActivity.class.getSimpleName();
 
     public static final String KEY_SEARCH_RESULT = "KEY_SEARCH_RESULT";
+    public static final String CLASS_NAME = "CLASS_NAME";
 
     @BindView(R.id.recycler)
     RecyclerView mRecyclerView;
@@ -120,6 +121,7 @@ public abstract class AbsSearchActivity extends BaseActivity
     public void onItemClick(Searchable item) {
         Intent result = new Intent();
         result.putExtra(KEY_SEARCH_RESULT, item.getCode());
+        result.putExtra(CLASS_NAME, item.getClassName());
         setResult(RESULT_OK, result);
 
         finish();

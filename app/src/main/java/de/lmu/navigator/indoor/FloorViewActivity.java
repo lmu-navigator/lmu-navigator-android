@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import butterknife.ButterKnife;
 import de.lmu.navigator.R;
 import de.lmu.navigator.app.BaseActivity;
+import de.lmu.navigator.database.ModelHelper;
 import de.lmu.navigator.database.model.Building;
 import de.lmu.navigator.database.model.Room;
 import de.lmu.navigator.search.AbsSearchActivity;
@@ -60,7 +61,7 @@ public class FloorViewActivity extends BaseActivity {
                     .commit();
         }
 
-        setTitle(mBuilding.getDisplayName());
+        setTitle(ModelHelper.getName(mBuilding));
     }
 
     public TileViewFragment getTileViewFragment() {

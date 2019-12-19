@@ -31,6 +31,7 @@ import java.util.List;
 import de.lmu.navigator.R;
 import de.lmu.navigator.app.BuildingDetailActivity;
 import de.lmu.navigator.app.MainActivity;
+import de.lmu.navigator.database.ModelHelper;
 import de.lmu.navigator.database.model.Building;
 import io.realm.RealmResults;
 
@@ -201,7 +202,7 @@ public class ClusterMapFragment extends SupportMapFragment implements
             mDialogClusterItems = Lists.newArrayList(cluster.getItems());
             String[] items = new String[cluster.getSize()];
             for (int i = 0; i < mDialogClusterItems.size(); i++) {
-                items[i] = mDialogClusterItems.get(i).getBuilding().getDisplayName();
+                items[i] = ModelHelper.getName(mDialogClusterItems.get(i).getBuilding());
             }
 
             new AlertDialog.Builder(getActivity())

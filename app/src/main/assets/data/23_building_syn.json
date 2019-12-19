@@ -1,0 +1,30 @@
+[
+  {
+    "bCode": "bw0000",
+    "syn": "Hauptgebäude"
+  },
+  {
+    "bCode": "bw1003",
+    "syn": "Mathebau"
+  },
+  {
+    "bCode": "bw0601",
+    "syn": "Fakultät für Psychologie und Pädagogik"
+  },
+  {
+    "bCode": "bw0601",
+    "syn": "Schweinchenbau"
+  },
+  {
+    "bCode": "bw1715",
+    "syn": "Pathologisches Institut"
+  },
+  {
+    "bCode": "TODO",
+    "syn": "Philologicum"
+  },
+  {
+    "bCode": "bw0120",
+    "syn": "Institut für Statistik"
+  }
+]

@@ -40,6 +40,10 @@
     <string name="prefs_categroy_general">Allgemein</string>
     <string name="prefs_crash_logs_title">Crash Logs und Statistiken senden</string>
     <string name="prefs_crash_logs_summary">Anonyme Absturzberichte und Statistiken helfen uns, Fehler schneller zu beseitigen und die App zu verbessern. Es werden keine privaten Daten gesammelt.</string>
+    <string name="prefs_display_synonym_title">Namen im Titel anzeigen</string>
+    <string name="prefs_display_synonym_summary">Wenn Synonyme für Räume und Gebäude verfügbar sind, zeige diese als Titel und füge die Adressinformation der Beschreibung hinzu.</string>
+    <string name="prefs_search_advanced_title">Erweiterte Suche</string>
+    <string name="prefs_search_advanced_summary">Auch benannte Räume in der Hauptsuche berücksichtigen</string>
     <string name="prefs_category_information">Informationen</string>
     <string name="prefs_licences_title">Open-Source-Lizenzen</string>
     <string name="prefs_feedback_title">Feedback geben</string>
